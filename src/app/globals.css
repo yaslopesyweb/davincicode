@@ -1,6 +1,4 @@
 @font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+  font-family: 'Roboto Flex', sans-serif;
+  src: local('Roboto Flex'), url('https://fonts.googleapis.com/css2?family=Rajdhani&family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap');
 }
