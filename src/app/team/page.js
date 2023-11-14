@@ -24,6 +24,12 @@ export default function Home() {
         <Espaco/>
   
         <Grupo 
+           text="Débora Dâmaso  ................. RM: 97836"
+         />
+
+        <Espaco/>
+  
+        <Grupo 
           text="Helena Paixão .............. RM: 550929"
         />
 

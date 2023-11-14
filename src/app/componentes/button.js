@@ -1,9 +1,9 @@
 "use client"
 import styled from "styled-components";
-
+ 
 // Estilizar botão
 const Button = styled.button`
-    background-color: #0046C0;
+    background-color: ${props => props.color};
     text-align: center;
     color: white;
     padding: 13px 16px;
@@ -21,18 +21,18 @@ const Button = styled.button`
     &:hover {
         background-color: darkblue;
     }
-
+ 
     @media (max-width: 280px) {
         max-width: 215px;
     }
-
+ 
 `;
-
+ 
 // Botão
-export default function Botao({ text }) {
+export default function Botao({ text, color }) {
     return (
         <div>
-        <Button>{text}</Button>
+            <Button color={color}>{text}</Button>
         </div>
     );
 }

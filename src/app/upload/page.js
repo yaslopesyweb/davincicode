@@ -1,62 +1,62 @@
+//UPLOAD
+"use client"
+import React, { useState, useEffect } from "react";
 import VoltarTitulo from "../componentes/back-title";
 import Grupo from "../componentes/group";
 import CarregarFoto from "../componentes/upload-photo";
+import TextoLink from "../componentes/link-text";
 import Espaco from "../componentes/space";
 import Botao from "../componentes/button";
-import TextoLink from "../componentes/link-text";
+import Link from "next/link";
 
 export default function Home() {
-    return (
-      <main>
-        
-        <VoltarTitulo 
-            backLink="../acs"
-            text="Vistoria Online"
-        />
-        
-        <Grupo 
-            text="Carregar fotos da bicicleta"
-        />
-        
-        <CarregarFoto 
-            placeholder="Arquivo JPEG"
-            title="Foto Frontal"
-        />
+  const [selectedFile, setSelectedFile] = useState(null);
 
-        <TextoLink
-            text="Exemplo foto frontal"
-        />
-  
-        <Espaco/>
-        
-        <CarregarFoto 
-            placeholder="Arquivo JPEG"
-            title="Foto Lateral Esquerda"
-        />
+  useEffect(() => {
+    // Aqui você pode lidar com o arquivo selecionado
+    if (selectedFile) {
+      console.log("Arquivo selecionado:", selectedFile);
+    }
+  }, [selectedFile]);
 
-        <TextoLink
-            text="Exemplo foto lateral esquerda"
-        />
+  return (
+    <main>
+      <VoltarTitulo backLink="../acs" text="Vistoria Online" />
 
-        <Espaco/>
-  
-        <CarregarFoto 
-            placeholder="Arquivo JPEG"
-            title="Foto Lateral Direita"
-        />
+      <Grupo text="Carregar fotos da bicicleta" />
 
-        <TextoLink
-            text="Exemplo foto lateral direita"
-        />
 
-        <Grupo 
-            text="Siga corretamente os exemplos disponíveis."
-        />
+      <Espaco />
 
-        <Botao 
+      <CarregarFoto
+        placeholder="Arquivo JPEG"
+        title="Foto Lateral Esquerda"
+        onChange={(event) => setSelectedFile(event.target.files[0])}
+      />
+
+      <TextoLink text="Exemplo foto lateral esquerda" />
+
+      <Espaco />
+
+      <CarregarFoto
+        placeholder="Arquivo JPEG"
+        title="Foto Lateral Direita"
+        onChange={(event) => setSelectedFile(event.target.files[0])}
+      />
+
+      <TextoLink text="Exemplo foto lateral direita" />
+
+      <Grupo text="Siga corretamente os exemplos disponíveis." />
+      <Link 
+            href="../api"
+            style={{
+                textDecoration: 'none'}}
+        >
+            <Botao 
             text="Concluir Vistoria"
-        />
-        
-      </main>
-    );
-  }
+            />
+      </Link>
+
+    </main>
+  );
+}
