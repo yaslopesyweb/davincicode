@@ -1,3 +1,4 @@
+"use client"
 import Grupo from "../componentes/group";
 import Espaco from "../componentes/space";
 import Botao from "../componentes/button";
@@ -5,6 +6,7 @@ import Link from 'next/link'
 import TextoLink from "../componentes/link-text";
 
 export default function Home() {
+  
     return (
       <main>
         <Grupo 
@@ -20,6 +22,12 @@ export default function Home() {
         <Grupo 
           text="Cássio Yuji ................. RM: 551491"
         />
+
+        <Espaco/>
+  
+        <Grupo 
+           text="Débora Dâmaso  ................. RM: 97836"
+         />
 
         <Espaco/>
   
@@ -57,7 +65,7 @@ export default function Home() {
                 textDecoration: 'none'}}
         >
             <Botao 
-            text="Vistoria Online"
+              enabled="true"  text="Vistoria Online" 
             />
         </Link>
         

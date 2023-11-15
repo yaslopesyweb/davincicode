@@ -1,4 +1,12 @@
 @font-face {
-  font-family: 'Roboto Flex', sans-serif;
-  src: local('Roboto Flex'), url('https://fonts.googleapis.com/css2?family=Rajdhani&family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap');
-}
+    font-family: 'Roboto Flex', sans-serif;
+    src: local('Roboto Flex'), url('https://fonts.googleapis.com/css2?family=Rajdhani&family=Roboto+Flex:opsz,wght@8..144,400;8..144,600;8..144,700&display=swap');
+  }
+
+  .centered-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh; 
+  }

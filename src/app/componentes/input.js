@@ -11,7 +11,9 @@ const Title = styled.label`
     justify-content: space-around;
     top: -5px;
     left: 0;
+    font-family: 'Roboto Flex', sans-serif;
     font-size: 12px;
+    font-weight: 400;
     color: #5E6366;
     user-select: none;
 
@@ -41,11 +43,11 @@ const Input = styled.input`
     }
 `;
 
-export default function Entrada({ placeholder, title }) {
+export default function Entrada({ placeholder, title, onChange, value }) {
     return (
-        <InputContainer>
-            <Title>{title}</Title>
-            <Input placeholder={placeholder}></Input>
-        </InputContainer>
+      <InputContainer>
+        <Title>{title}</Title>
+        <Input placeholder={placeholder} onChange={onChange} value={value}></Input>
+      </InputContainer>
     );
-}
+  }
