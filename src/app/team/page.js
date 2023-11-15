@@ -65,7 +65,7 @@ export default function Home() {
                 textDecoration: 'none'}}
         >
             <Botao 
-              enabled={true}  text="Vistoria Online" 
+              enabled="true"  text="Vistoria Online" 
             />
         </Link>
         

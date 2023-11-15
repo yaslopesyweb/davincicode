@@ -28,7 +28,7 @@ export default function ApiPage() {
       {apiResult && <Grupo text={apiResult} />}
       <Espaco />
       <Link href="../team" passHref>
-        <Botao enabled={true} text="Finalizar" />
+        <Botao enabled="true" text="Finalizar" />
       </Link>
     </main>
   );
