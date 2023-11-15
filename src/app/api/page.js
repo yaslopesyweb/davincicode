@@ -4,6 +4,7 @@ import Grupo from '../componentes/group';
 import Espaco from '../componentes/space';
 import Botao from '../componentes/button';
 import Link from 'next/link';
+import Titulo from '../componentes/title';
 
 export default function ApiPage() {
   const [apiResult, setApiResult] = useState(null);
@@ -23,13 +24,18 @@ export default function ApiPage() {
 
   return (
     <main>
-      <Grupo text="Verificação da API" />
-      <Espaco />
-      {apiResult && <Grupo text={apiResult} />}
-      <Espaco />
-      <Link href="../team" passHref>
-        <Botao enabled="true" text="Finalizar" />
-      </Link>
+      <div className="centered-inputs">
+        <Titulo text="Vistoria Online"/>
+        <Grupo text="Verificação da API" />
+        {apiResult && <Grupo text={apiResult} />}
+        <Espaco />
+        <Link href="../team" passHref
+          style={{
+            textDecoration: 'none'}}
+        >
+          <Botao enabled="true" text="Finalizar" />
+        </Link>
+      </div>
     </main>
   );
 }
