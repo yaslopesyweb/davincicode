@@ -1,4 +1,3 @@
-//UPLOAD
 "use client"
 import React, { useState, useEffect } from "react";
 import VoltarTitulo from "../componentes/back-title";
@@ -8,55 +7,105 @@ import TextoLink from "../componentes/link-text";
 import Espaco from "../componentes/space";
 import Botao from "../componentes/button";
 import Link from "next/link";
+import PopupImage from "../componentes/popup-image";
+import axios from 'axios';
 
 export default function Home() {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [adicionarAcessorios] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([null, null]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupImageUrl, setPopupImageUrl] = useState("");
 
-  useEffect(() => {
-    // Aqui você pode lidar com o arquivo selecionado
-    if (selectedFile) {
-      console.log("Arquivo selecionado:", selectedFile);
+  const handleFileChange = (index, file) => {
+    const newSelectedFiles = [...selectedFiles];
+    newSelectedFiles[index] = file;
+    setSelectedFiles(newSelectedFiles);
+  };
+
+  const openPopup = (imageUrl) => {
+    setPopupImageUrl(imageUrl);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleConcluirVistoriaClick = async () => {
+    try {
+      const formData = new FormData();
+      selectedFiles.forEach((file) => {
+        if (file) {
+          formData.append(`file`, file);
+        }
+      });
+  
+      const response = await axios.post('http://127.0.0.1:5000/predict', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true, 
+      });
+  
+      const leftImageResult = response.data;
+      console.log('Resultado da API da foto lateral esquerda:', leftImageResult);
+  
+      window.location.href = `../api?leftImageResult=${leftImageResult}`;
+    } catch (error) {
+      console.error('Erro ao enviar imagens para a API:', error);
     }
-  }, [selectedFile]);
+  };
+
+  console.log("adicionarAcessorios:", adicionarAcessorios);
+  const backLink = adicionarAcessorios ? "/" : "../acs";
+  console.log("backLink:", backLink);
 
   return (
     <main>
-      <VoltarTitulo backLink="../acs" text="Vistoria Online" />
+      <div className="centered-inputs">
+        <VoltarTitulo backLink={backLink} text="Vistoria Online" />
 
-      <Grupo text="Carregar fotos da bicicleta" />
+        <Grupo text="Carregar fotos da bicicleta" />
 
+        <CarregarFoto
+          placeholder={selectedFiles[0] ? selectedFiles[0].name : "Arquivo JPG"}
+          title="Foto Lateral Esquerda"
+          onChange={(event) => {
+            handleFileChange(0, event.target.files[0]);
+          }}
+          name="file"
+        />
 
-      <Espaco />
+        <TextoLink text="Exemplo foto lateral esquerda" onClick={() => openPopup('images/lateralesquerda.jpg')} />
 
-      <CarregarFoto
-        placeholder="Arquivo JPEG"
-        title="Foto Lateral Esquerda"
-        onChange={(event) => setSelectedFile(event.target.files[0])}
-      />
+        <Espaco />
 
-      <TextoLink text="Exemplo foto lateral esquerda" />
+        <CarregarFoto
+          placeholder={selectedFiles[1] ? selectedFiles[1].name : "Arquivo JPG"}
+          title="Foto Lateral Direita"
+          onChange={(event) => {
+            handleFileChange(1, event.target.files[0]);
+          }}
+        />
 
-      <Espaco />
+        <TextoLink text="Exemplo foto lateral direita" onClick={() => openPopup('images/lateraldireita.jpg')} />
 
-      <CarregarFoto
-        placeholder="Arquivo JPEG"
-        title="Foto Lateral Direita"
-        onChange={(event) => setSelectedFile(event.target.files[0])}
-      />
-
-      <TextoLink text="Exemplo foto lateral direita" />
-
-      <Grupo text="Siga corretamente os exemplos disponíveis." />
-      <Link 
-            href="../api"
-            style={{
-                textDecoration: 'none'}}
+        <Grupo text="Siga corretamente os exemplos disponíveis." />
+        <Link 
+          href="../api"
+          style={{
+            textDecoration: 'none'
+          }}
+          onClick={handleConcluirVistoriaClick}
         >
-            <Botao 
+          <Botao 
             text="Concluir Vistoria"
-            />
+            enabled={selectedFiles.every(file => file !== null)}
+          />
       </Link>
+      </div>
 
+      {showPopup && <PopupImage imageUrl={popupImageUrl} onClose={closePopup} />}
     </main>
   );
 }

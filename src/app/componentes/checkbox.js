@@ -18,23 +18,16 @@ const CheckboxInput = styled.input`
     height: 20px; 
     appearance: none;
     background-color: #fff;
-    border: 2px solid #5E6366; 
-    border-radius: 8px; 
+    box-shadow: 0 0 0 1px #5E6366;
+    border: 1px solid #fff; 
+    border-radius: 6px; 
     outline: none; 
     cursor: pointer;
 
     &:checked {
         background-color: #0046C0;
-        border: 2px solid #5E6366;
-    }
-    
-    &:checked::before {
-        content: '✓';
-        font-size: 13px; 
-        color: #fff; 
-        position: relative;
-        top: -1px;
-        left: 3px;
+        box-shadow: 0 0 0 1px #0046C0;
+        border: 1px solid #fff;
     }
 `;
 
@@ -43,7 +36,7 @@ const CheckboxLabel = styled.label`
     display: flex;
     justify-content: center;
     font-family: 'Roboto Flex', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: #5E6366;
     cursor: pointer;
@@ -57,5 +50,6 @@ export default function CheckboxWithLabel({ label }) {
                     {label}
                 </CheckboxLabel>
         </PageContainer>
+        
     );
 }

@@ -14,10 +14,14 @@ const Title = styled.label`
     font-size: 12px;
     color: #5E6366;
     user-select: none;
-
 `;
 
-const UpFoto = styled.input`
+// Estilização do botão para upload de foto
+const StyledFileInput = styled.input`
+    display: none;
+`;
+
+const UpFoto = styled.label`
     display: flex;
     justify-content: center;
     padding: 13px 16px;
@@ -32,6 +36,7 @@ const UpFoto = styled.input`
     display: block;
     padding-left: 16px;
     user-select: none;
+    cursor: pointer; 
 
     ::placeholder {
         color: #ABAFB1;
@@ -42,11 +47,14 @@ const UpFoto = styled.input`
     }
 `;
 
-export default function CarregarFoto({ placeholder, title }) {
+export default function CarregarFoto({ placeholder, title, onChange }) {
     return (
         <InputContainer>
             <Title>{title}</Title>
-            <UpFoto placeholder={placeholder}></UpFoto>
+            <UpFoto>
+                {placeholder}
+                <StyledFileInput type="file" accept="image/jpeg" onChange={onChange} />
+            </UpFoto>
         </InputContainer>
     );
 }
